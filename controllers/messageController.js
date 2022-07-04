@@ -4,7 +4,7 @@ module.exports.addMessage = async (req,res,next) => {
         const {from, to, message} = req.body;
         const data = await Message.create({
             message: {text: message},
-            users: [from, to],
+            user: [from, to],
             sender: from,
         });
 
@@ -29,8 +29,9 @@ module.exports.addMessage = async (req,res,next) => {
 module.exports.getMessages = async (req,res,next) => {
     try {
         const {from, to} = req.body;
+
         const messages = await Message.find({
-            users: {
+            user: {
                 $all: [from, to],
             },
         }).sort({updatedAt: 1});
