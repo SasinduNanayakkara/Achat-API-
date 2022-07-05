@@ -22,6 +22,8 @@ mongoose.connect(process.env.MONGODB_URL, {
 app.use("/api", userRoutes);
 app.use("/api/msg", messageRoutes);
 
+app.get("/", (req, res) => res.send("chatX"));
+
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
